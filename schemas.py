@@ -5,16 +5,19 @@ from typing import List,Optional
 
 
 class Projet(BaseModel):
-    typepv:str
-    vmx:str
-    imx:str
-    pmx:str
-    temp:str
-    long:str
-    lat:str
+    type:str
+    pmax:int
+    imx:int
+    dimension:int
+    description:str 
+    name_projet:str
+    nb_panel:int
+    temp:int
+    localisation:str
     class Config:
         orm_mode = True
 
+    
 
 class Gatewaye(BaseModel):
     name:str
@@ -26,6 +29,15 @@ class Device(BaseModel):
     name:str
     class Config:
         orm_mode = True
+
+
+class Sensor(BaseModel):
+    sensor_name:str
+    class Config:
+        orm_mode = True
+
+
+
 
 
 class User(BaseModel):
@@ -44,13 +56,15 @@ class Showuser(BaseModel):
 
 
 class Showprojet(BaseModel):
-    typepv:str
-    vmx:str
-    imx:str
-    pmx:str 
-    temp:str
-    long:str
-    lat:str
+    type:str
+    pmax:int
+    imx:int
+    dimension:int
+    description:str 
+    name_projet:str
+    nb_panel:int
+    temp:int
+    localisation:str
     creator:Showuser
     gatewayes:List[Gatewaye] = []
     class Config:
@@ -68,6 +82,12 @@ class Showdevice(BaseModel):
     name:str
     class Config:
         orm_mode = True
+        
+        
+class Showsensor(BaseModel):
+    sensor_name:str
+    class Config:
+            orm_mode = True
 
 class Login(BaseModel):
     username:str

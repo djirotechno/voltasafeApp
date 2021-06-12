@@ -1,0 +1,131 @@
+
+{% extends '/layout/_sidebar.html'%}
+
+{% block title %} Projets{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>
+                    <small>Taken from <a href="https://github.com/rstaib/jquery-steps" target="_blank">github.com/rstaib/jquery-steps</a> &amp; <a href="https://jqueryvalidation.org/" target="_blank">jqueryvalidation.org</a></small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Nexa</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
+                    <li class="breadcrumb-item active">Form Wizard</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+      
+        <!-- Basic Example | Vertical Layout -->
+       
+        <!-- #END# Basic Example | Vertical Layout --> 
+        <!-- Advanced Form Example With Validation -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2></h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <form id="wizard_with_validation" method="POST" action="/projet/">
+                            <h3>Projet Information</h3>
+                            <fieldset>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name_projet" required>
+                                        <label class="form-label">Name*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <textarea type="text" class="form-control" name="description"  required></textarea>
+                                        <label class="form-label">Description*</label>
+                                        
+                                    </div>
+                                </div>
+                    
+                            </fieldset>
+                            <h3>Installation Information</h3>
+                            <fieldset>
+
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" name="type_panel" class="form-control" required>
+                                        <label class="form-label">Type de Panneaux*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" name="nb_panel" class="form-control" required>
+                                        <label class="form-label">Nombre de Panneaux*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" name="dimension" class="form-control" required>
+                                        <label class="form-label">Dimension*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" name="pmax" class="form-control" required>
+                                        <label class="form-label">P-Max*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input  type="number" name="imx" class="form-control" required>
+                                        <label class="form-label">I-Max*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                    
+                                        <input  type="number" name="temp" class="form-control" required>
+                                        <label class="form-label">Temp*</label>
+                                    </div>
+                                    <div class="help-info">The warning step will show up if age is less than 18</div>
+                                </div>
+                            </fieldset>
+                            <h3>Localisation </h3>
+                            <fieldset>
+                                
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                    
+                                        <input  type="text" name="localisation" class="form-control" required>
+                                        <label class="form-label">Localisation</label>
+                                    </div>
+                                    <div class="help-info">The warning step will show up if age is less than 18</div>
+                                </div>
+                                <input type="hidden" type="number" name="user_id" value="1">
+                                <!-- <iframe width="425" height="380" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-18.544921875000004%2C10.574222078332806%2C-11.074218750000002%2C17.308687886770034&amp;layer=mapnik&amp;marker=13.966054081318314%2C-14.8095703125" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=13.966&amp;mlon=-14.810#map=7/13.966/-14.810">Afficher une carte plus grande</a></small> -->
+                            </fieldset>
+                            <fieldset>
+                                <button class="btn btn-success" type="submit"> valider</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Advanced Form Example With Validation --> 
+    </div>
+</section>
+{% endblock %}

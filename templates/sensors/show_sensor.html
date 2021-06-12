@@ -1,0 +1,93 @@
+
+
+{% extends '/layout/_sidebar.html'%}
+
+{% block title %} Projets{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Form Wizard
+                    <small>Taken from <a href="https://github.com/rstaib/jquery-steps" target="_blank">github.com/rstaib/jquery-steps</a> &amp; <a href="https://jqueryvalidation.org/" target="_blank">jqueryvalidation.org</a></small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Nexa</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
+                    <li class="breadcrumb-item active">Form Wizard</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            {% for sensors in sensors %}
+            <div class="col-lg-4 col-md-3 col-sm-3">
+                <div class="card">
+                    <div class="header">
+                        <h3>Sensor</h3>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                <ul class="dropdown-menu pull-right" class="pullDown">
+                                    <li><a href="/device/{{sensors.id}}/edit" data-toggle="modal" data-target="#largeModal">Edit</a></li>
+                                    <li><a href="javascript:void(0);">Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        {{sensors.name}}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- #END# Advanced Form Example With Validation --> 
+    </div>
+</section>
+
+<section>
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body"> 
+                    <form id="wizard_with_validation" method="POST"  action="/device">
+                        <fieldset>
+                             <div class="form-group form-float">
+                                 <div class="form-line">
+                                     <input type="text" name="deviceName" id="modal_body" class="form-control" required>
+                                     <label class="form-label"></label>
+                                 </div>
+                             </div>
+                             <div class="form-group form-float">
+                                 <label class="form-label">Gatewaye</label>
+                             <div class="col-lg-3 col-md-6">
+                                 <select class="form-control show-tick" name="gw_id">
+                                     {% for gatewayes in gatewaye %}
+                                    <option value="{{gatewaye.id}}">{{gatewayes.name}}</option>
+                                   {% endfor %}
+                                 </select>
+                             </div>
+                             </div>
+                         </fieldset>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="SAVE CHANGES" class="btn btn-link waves-effect">
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
