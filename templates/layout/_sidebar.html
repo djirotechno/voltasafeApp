@@ -24,6 +24,10 @@
 
 
 
+
+
+
+    
 </head>
 
 <body class="theme-cyan index2">
@@ -142,11 +146,8 @@
 <div class="menu-container">
     <div class="menu">
         <ul class="pullDown">
-            <li><a href="javascript:void(0)">Dashboard</a>
-                <ul class="pullDown">
-                    <li><a href="index.html">Main Dashboard</a></li>
-                    <li><a href="dashboard-rtl.html">RTL Dashboard</a></li>
-                </ul>
+            <li><a href="/dashboard">Dashboard</a>
+    
             </li>
             <li><a href="/devices"><i class="zmdi zmdi-shopping-cart"></i> Devices</a>
                 <ul class="pullDown">
@@ -172,6 +173,11 @@
                     
                 </ul>
             </li>  
+            <li><a href="/projets">Dimensionement</a>
+                <ul class="pullDown">                            
+                    <li><a href="/form_projet">Dimensionement</a></li>
+                </ul>
+            </li> 
         </ul>
     </div>
 </div>
@@ -189,6 +195,25 @@
     <script src="{{url_for('static',path='/assets/plugins/jquery-steps/jquery.steps.js')}}"></script>
     <script src="{{url_for('static',path='/assets/bundles/mainscripts.bundle.js')}}"></script>
     <script src="{{url_for('static',path='/assets/js/pages/forms/form-wizard.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/js/pages/forms/form-wizard.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/js/pages/iot.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/bundles/sparkline.bundle.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/plugins/jquery-sparkline/jquery.sparkline.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/plugins/raphael/raphael.min.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/plugins/morrisjs/morris.js')}}"></script>
+
+
+ 
+  
+    
+    
+    
+  
+
+
+
+
+
 
     <script>
         /*global $ */

@@ -20,6 +20,10 @@ import oauth2
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 from fastapi.responses import RedirectResponse,HTMLResponse
+
+import routers.device
+
+
 # a0pqy1y5_ARyUZxS9h6ZBxsvckdViExBe69FBDRy1      a0pqy1y5
   # ,get_current_user:schemas.User = Depends(oauth2.get_current_user)
   
@@ -43,7 +47,7 @@ def get_db():
       finally:
             db.close()
             
-@app.get('/home',tags=["Home"])
+@app.get('/home',include_in_schema=False)
 def home(request:Request):
       return templates.TemplateResponse('home.html',{"request":request})            
 # #######################################################################
@@ -51,16 +55,16 @@ def home(request:Request):
 #  Route Formulaire Crèe Projets , Gatewayes, Devices, Sensors
 #
 #########################################################################
-@app.get('/form_projet',tags=["Add"])
+@app.get('/form_projet',tags=["Add"],include_in_schema=False)
 def get_form(request:Request):
       return templates.TemplateResponse('/projets/add_projet.html',{"request":request})        
 
-@app.get('/form_gw',tags=["Add"],response_model=List[schemas.Showprojet])
+@app.get('/form_gw',tags=["Add"],response_model=List[schemas.Showprojet],include_in_schema=False)
 def get_form(request:Request,db:Session=Depends(get_db)):
       projets = db.query(models.Projet).all()
       return templates.TemplateResponse('/gatewayes/add_gw.html',{"request":request,"projets":projets})  
     
-@app.get('/form_device',tags=["Device"],response_model=List[schemas.Showdevice])
+@app.get('/form_device',tags=["Device"],response_model=List[schemas.Showdevice],include_in_schema=False)
 def get_form(request:Request,db:Session=Depends(get_db)):
      
       gatewayes = db.query(models.Gatewaye).all()
@@ -71,83 +75,18 @@ def get_form(request:Request,db:Session=Depends(get_db)):
                                                                     })
 
 
-@app.get('/form_sensor',tags=["Add"])
+@app.get('/form_sensor',tags=["Add"],include_in_schema=False)
 def get_form(request:Request,db:Session=Depends(get_db)):
        devices = db.query(models.Device).all()
        return templates.TemplateResponse('/sensors/add_sensor.html',{"request":request,"devices":devices})  
 
 
-# #######################################################################
-#
-#                           CRUD PROJETS
-#
-#########################################################################
-
-            
-@app.post("/projet/",tags=["Projets"])
-def project(db:Session=Depends(get_db),
-            name_projet:str = Form(...),
-            description:str = Form(...),
-            nb_panel:int = Form(...),
-            type_panel:str = Form(...),
-            dimension:int = Form(...),
-            pmax:int = Form(...),
-            imx:int = Form(...),
-            temp:int = Form(...),
-            localisation:str = Form(...),
-            user_id = 1        
-            ):
-      new_projet = models.Projet(
-            name_projet= name_projet,
-            description=description,
-            nb_panel=nb_panel,
-            type_panel=type_panel,
-            dimension=dimension,
-            pmax=pmax,
-            imx=imx,
-            temp=temp,
-            localisation = localisation,
-            user_id = user_id)
-      db.add(new_projet)
-      db.commit()
-      db.refresh(new_projet)
-      
-      return RedirectResponse(url="/projets", status_code=HTTP_302_FOUND)
-            
-            
-@app.get('/projets',response_model=List[schemas.Showprojet],  tags=["Projets"])
-def all(request:Request,db:Session = Depends(get_db) ):
-       projets = db.query(models.Projet).all()
-       return templates.TemplateResponse("projets/show_projet.html", {"request": request, "projets": projets})
+@app.get('/dashboard',tags=["Add"],include_in_schema=False)
+def get_form(request:Request,db:Session=Depends(get_db)):
+      #  devices = db.query(models.Device).all()
+       return templates.TemplateResponse('dash.html',{"request":request})  
 
 
-@app.get('/projet/{id}',status_code=200,response_model=schemas.Showprojet,tags=["Projets"])
-def show(id,request:Request ,db:Session = Depends(get_db)):
-      projet = db.query(models.Projet).filter(models.Projet.id == id).first()
-      if not projet:
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
-            # response.status_code = status.HTTP_404_NOT_FOUND
-            # return {'detail':f"Projet with id {id} is not available"}
-      # return templates.TemplateResponse("projet.html", {"request": request, "projets": projet  })
-      return projet 
-
-@app.put('/projet/{id}',status_code=status.HTTP_202_ACCEPTED,tags=["Projets"])
-def update(id,request: schemas.Projet,db:Session = Depends(get_db)):
-     projet = db.query(models.Projet).filter(models.Projet.id == id)
-     if not projet.first():
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
-            # response.status_code = status.HTTP_404_NOT_FOUND
-            # return {'detail':f"Projet with id {id} is not available"}
-     projet.update(request)
-     db.commit()
-     return "update"
-
-
-@app.delete('/projet/{id}',status_code=status.HTTP_204_NO_CONTENT,tags=["Projets"])
-def destroy(id,db:Session = Depends(get_db)):
-      db.query(models.Projet).filter(models.Projet.id == id).delete()
-      db.commit()
-      return 'done'
 
 
 # #######################################################################
@@ -177,47 +116,98 @@ def get_login(request:Request):
    return templates.TemplateResponse("login.html",{"request":request})
 
 
+
+
 # #######################################################################
 #
-#                              CRUD DEVICES                             
+#                           CRUD PROJETS
 #
 #########################################################################
 
-@app.post("/device",tags=["Device"])
-def device(db:Session=Depends(get_db),
-           deviceName:str = Form(...),
-           gw_id:int= Form(...),
-           d_id:str = Form(...)):
-      newdevice = models.Device(
-            name = deviceName,
-            gw_id = gw_id,
-            d_id = d_id)
-      db.add(newdevice)
-      db.commit()       
-      return RedirectResponse(url="/devices", status_code=HTTP_302_FOUND)
+            
+@app.post("/projet",tags=["Projets"])
+def project(db:Session=Depends(get_db),
+            name_projet:str = Form(...),
+            description:str = Form(...),
+            nb_panel:int = Form(...),
+            type_panel:str = Form(...),
+            dimension:int = Form(...),
+            pmax:int = Form(...),
+            imx:int = Form(...),
+            temp:int = Form(...),
+            localisation:str = Form(...),
+            user_id = 1        
+            ):
+      new_projet = models.Projet(
+            name_projet= name_projet,
+            description=description,
+            nb_panel=nb_panel,
+            type_panel=type_panel,
+            dimension=dimension,
+            pmax=pmax,
+            imx=imx,
+            temp=temp,
+            localisation = localisation,
+            user_id = user_id)
+      db.add(new_projet)
+      db.commit()
+      db.refresh(new_projet)
       
+      return RedirectResponse(url="/projets", status_code=HTTP_302_FOUND)
+            
+       
+@app.post("/projet/new",tags=["Projets"],include_in_schema=False)
+def project(db:Session=Depends(get_db),
+            name_projet:str = Form(...),
+            description:str = Form(...),
+            nb_panel:int = Form(...),
+            type_panel:str = Form(...),
+            dimension:int = Form(...),
+            pmax:int = Form(...),
+            imx:int = Form(...),
+            temp:int = Form(...),
+            localisation:str = Form(...),
+            user_id = 1        
+            ):
+      new_projet = models.Projet(
+            name_projet= name_projet,
+            description=description,
+            nb_panel=nb_panel,
+            type_panel=type_panel,
+            dimension=dimension,
+            pmax=pmax,
+            imx=imx,
+            temp=temp,
+            localisation = localisation,
+            user_id = user_id)
+      return new_projet
+                 
 
-          
-@app.get('/devices',response_model=List[schemas.Showdevice],  tags=["Device"])
+@app.get('/projets/all',response_model=List[schemas.Showprojet], tags=["Projets"])
+def get_all(request:Request,db:Session = Depends(get_db) ):
+      projets = db.query(models.Projet).all()
+      return projets
+
+@app.get('/projets',response_model=List[schemas.Showprojet],  include_in_schema=False)
 def all(request:Request,db:Session = Depends(get_db) ):
-       devices = db.query(models.Device).all()
-       return templates.TemplateResponse("devices/show_device.html", {"request": request, "devices":devices})
-      
-      
-@app.get('/device/{id}/edit',response_model=schemas.Showdevice,tags=["Device"])
+       projets = db.query(models.Projet).all()
+       return templates.TemplateResponse("projets/show_projet.html", {"request": request, "projets": projets})
+ 
+
+
+@app.get('/projet/{id}',status_code=200,response_model=schemas.Showprojet,include_in_schema=False)
 def show(id,request:Request ,db:Session = Depends(get_db)):
-      deviceshow = db.query(models.Device).filter(models.Device.id == id).first()
-     
-      # if not device:
-      #       raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
+      projet = db.query(models.Projet).filter(models.Projet.id == id).first()
+      if not projet:
+            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
             # response.status_code = status.HTTP_404_NOT_FOUND
             # return {'detail':f"Projet with id {id} is not available"}
-      return templates.TemplateResponse("devices/show_device.html", {"request": request, "deviceshow": deviceshow  })
-      
+      # return templates.TemplateResponse("projet.html", {"request": request, "projets": projet  })
+      return projet 
 
-@app.put('/device/{id}/name',status_code=status.HTTP_202_ACCEPTED,tags=["Device"])
-def device_name(id,request: schemas.Device,db:Session = Depends(get_db)):
-     projet = db.query(models.Device).filter(models.Device.id == id)
+@app.put('/projet/{id}',status_code=status.HTTP_202_ACCEPTED,include_in_schema=False)
+def update(id,request: schemas.Projet,db:Session = Depends(get_db)):
+     projet = db.query(models.Projet).filter(models.Projet.id == id)
      if not projet.first():
             raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
             # response.status_code = status.HTTP_404_NOT_FOUND
@@ -227,24 +217,15 @@ def device_name(id,request: schemas.Device,db:Session = Depends(get_db)):
      return "update"
 
 
-@app.put('/device/{id}/id_gw',status_code=status.HTTP_202_ACCEPTED,tags=["Device"])
-def device_gw(id,request: schemas.Device,db:Session = Depends(get_db)):
-     Device = db.query(models.Device).filter(models.Device.id == id)
-     if not Device.first():
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
-            # response.status_code = status.HTTP_404_NOT_FOUND
-            # return {'detail':f"Projet with id {id} is not available"}
-     Device.update(request)
-     db.commit()
-     return "update"
-
-
-
-@app.delete('/device/{id}',status_code=status.HTTP_204_NO_CONTENT,tags=["Device"])
+@app.delete('/projet/{id}',status_code=status.HTTP_204_NO_CONTENT,include_in_schema=False)
 def destroy(id,db:Session = Depends(get_db)):
-      db.query(models.Device).filter(models.Device.id == id).delete()
+      db.query(models.Projet).filter(models.Projet.id == id).delete()
       db.commit()
       return 'done'
+
+
+
+
 
 
 # #######################################################################
@@ -312,77 +293,4 @@ def gw_name(id,request: schemas.Projet,db:Session = Depends(get_db)):
 #                              CRUD SENSORS
 #
 #########################################################################
-
-@app.post("/sensor",tags=["Sensor"])
-def sensor(db:Session=Depends(get_db),
-           sensor_name:str = Form(...),
-           unit:str=Form(...),
-           type_sensor:str = Form(...),
-           device_id:int = Form(...),
-           s_id:str = Form(...)
-           ):
-      new_sensor = models.Sensor(
-            sensor_name=sensor_name,
-            unit=unit,
-            type_sensor=type_sensor,
-            device_id = device_id,
-            s_id = s_id)
-      
-
-      db.add(new_sensor)
-      db.commit()
-      db.refresh(new_sensor)
-      return RedirectResponse(url="/sensors", status_code=HTTP_302_FOUND)
-            
-             
-@app.get('/sensors',response_model=List[schemas.Showsensor],  tags=["Sensor"])
-def all(request:Request,db:Session = Depends(get_db) ):
-       sensors = db.query(models.Sensor).all()
-       return templates.TemplateResponse("sensors/show_sensor.html", {"request": request, "sensors": sensors})
-
-
-@app.get('/sensor/{id}',status_code=200,response_model=schemas.Showsensor,tags=["Sensor"])
-def show(id,request:Request ,db:Session = Depends(get_db)):
-      projet = db.query(models.Sensor).filter(models.Sensor.id == id).first()
-      if not projet:
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
-            # response.status_code = status.HTTP_404_NOT_FOUND
-            # return {'detail':f"Projet with id {id} is not available"}
-      return templates.TemplateResponse("projet.html", {"request": request, "projets": projet  })
-
- 
-@app.put('/sensor/{id}/name',status_code=status.HTTP_202_ACCEPTED,tags=["Sensor"])
-def sensor_name(id,request: schemas.Sensor,db:Session = Depends(get_db)):
-     projet = db.query(models.Sensor).filter(models.Sensor.id == id)
-     if not projet.first():
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
-            # response.status_code = status.HTTP_404_NOT_FOUND
-            # return {'detail':f"Projet with id {id} is not available"}
-     projet.update(request)
-     db.commit()
-     return "update"
-
-
-@app.put('/sensor/{id}/id_device',status_code=status.HTTP_202_ACCEPTED,tags=["Sensor"])
-def sensor_dvc(id,request: schemas.Sensor,db:Session = Depends(get_db)):
-     projet = db.query(models.Sensor).filter(models.Sensor.id == id)
-     if not projet.first():
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
-            # response.status_code = status.HTTP_404_NOT_FOUND
-            # return {'detail':f"Projet with id {id} is not available"}
-     projet.update(request)
-     db.commit()
-     return "update"
-
-
-@app.delete('/sensor/{id}',status_code=status.HTTP_204_NO_CONTENT,tags=["Sensor"])
-def destroy(id,db:Session = Depends(get_db)):
-      db.query(models.Sensor).filter(models.Sensor.id == id).delete()
-      db.commit()
-      return 'done'
-
-
-
-
-
 

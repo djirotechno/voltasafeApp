@@ -5,7 +5,7 @@ from typing import List,Optional
 
 
 class Projet(BaseModel):
-    type:str
+    type_panel:str
     pmax:int
     imx:int
     dimension:int
@@ -56,7 +56,7 @@ class Showuser(BaseModel):
 
 
 class Showprojet(BaseModel):
-    type:str
+    type_panel:str
     pmax:int
     imx:int
     dimension:int

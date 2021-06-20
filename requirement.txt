@@ -9,3 +9,5 @@ bcrypt
 python-jose
 
 fastapi-login
+
+fastapi-mqtt
