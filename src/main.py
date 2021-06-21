@@ -21,7 +21,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 from fastapi.responses import RedirectResponse,HTMLResponse
 
-import routers.device
+
 
 
 # a0pqy1y5_ARyUZxS9h6ZBxsvckdViExBe69FBDRy1      a0pqy1y5
@@ -293,4 +293,79 @@ def gw_name(id,request: schemas.Projet,db:Session = Depends(get_db)):
 #                              CRUD SENSORS
 #
 #########################################################################
+
+# #######################################################################
+#
+#                              CRUD DEVICES       include_in_schema=False                      
+#
+#########################################################################
+
+@router.post("/device",tags=["Device"])
+def create_device(db:Session=Depends(get_db),
+           deviceName:str = Form(...),
+           gw_id:int= Form(...),
+           d_id:str = Form(...)):
+      newdevice = models.Device(
+            name = deviceName,
+            gw_id = gw_id,
+            d_id = d_id)
+      db.add(newdevice)
+      db.commit()       
+      return RedirectResponse(url="/devices", status_code=HTTP_302_FOUND)
+      
+
+@router.get('/device',response_model=List[schemas.Showdevice], tags=["Device"] )
+def get_devices(request:Request,db:Session = Depends(get_db) ):
+       devices = db.query(models.Device).all()
+       return templates.TemplateResponse("devices/show_device.html", {"request": request, "devices":devices})
+       
+      
+@router.get('/devices',response_model=List[schemas.Showdevice],include_in_schema=False )
+def all(request:Request,db:Session = Depends(get_db) ):
+       devices = db.query(models.Device).all()
+      #  return templates.TemplateResponse("devices/show_device.html", {"request": request, "devices":devices})
+       return devices
+      
+      
+      
+@router.get('/device/{device_id}',response_model=schemas.Showdevice,tags=["Device"])
+def show(id,request:Request ,db:Session = Depends(get_db)):
+      deviceshow = db.query(models.Device).filter(models.Device.id == id).first()
+     
+      # if not device:
+      #       raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
+            # response.status_code = status.HTTP_404_NOT_FOUND
+            # return {'detail':f"Projet with id {id} is not available"}
+      return templates.TemplateResponse("devices/show_device.html", {"request": request, "deviceshow": deviceshow  })
+      
+
+@router.put('/device/{device_id}/name',status_code=status.HTTP_202_ACCEPTED,tags=["Device"])
+def update(id,request: schemas.Device,db:Session = Depends(get_db)):
+     projet = db.query(models.Device).filter(models.Device.id == id)
+     if not projet.first():
+            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
+            # response.status_code = status.HTTP_404_NOT_FOUND
+            # return {'detail':f"Projet with id {id} is not available"}
+     projet.update(request)
+     db.commit()
+     return "update"
+
+
+@router.delete('/device/{device_id}',status_code=status.HTTP_204_NO_CONTENT,tags=["Device"])
+def destroy(id,db:Session = Depends(get_db)):
+      db.query(models.Device).filter(models.Device.id == id).delete()
+      db.commit()
+      return 'done'
+
+
+@router.put('/device/{device_id}/gatewaye_id',status_code=status.HTTP_202_ACCEPTED,tags=["Device"])
+def update_gatewaye(id,request: schemas.Device,db:Session = Depends(get_db)):
+     Device = db.query(models.Device).filter(models.Device.id == id)
+     if not Device.first():
+            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"Projet with id {id} is not available")
+            # response.status_code = status.HTTP_404_NOT_FOUND
+            # return {'detail':f"Projet with id {id} is not available"}
+     Device.update(request)
+     db.commit()
+     return "update"
 
