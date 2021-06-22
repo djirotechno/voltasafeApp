@@ -188,10 +188,10 @@ def get_all(request:Request,db:Session = Depends(get_db) ):
       projets = db.query(models.Projet).all()
       return projets
 
-@app.get('/projets',response_model=List[schemas.Showprojet],  include_in_schema=False)
-def all(request:Request,db:Session = Depends(get_db) ):
-       projets = db.query(models.Projet).all()
-       return templates.TemplateResponse("projets/show_projet.html", {"request": request, "projets": projets})
+# @app.get('/projets',response_model=List[schemas.Showprojet],  include_in_schema=False)
+# def all(request:Request,db:Session = Depends(get_db) ):
+      #  projets = db.query(models.Projet).all()
+      #  return templates.TemplateResponse("projets/show_projet.html", {"request": request, "projets": projets})
  
 
 
@@ -320,11 +320,11 @@ def get_devices(request:Request,db:Session = Depends(get_db) ):
        return templates.TemplateResponse("devices/show_device.html", {"request": request, "devices":devices})
        
       
-@app.get('/devices',response_model=List[schemas.Showdevice],include_in_schema=False )
-def all(request:Request,db:Session = Depends(get_db) ):
-       devices = db.query(models.Device).all()
-      #  return templates.TemplateResponse("devices/show_device.html", {"request": request, "devices":devices})
-       return devices
+# @app.get('/devices',response_model=List[schemas.Showdevice],include_in_schema=False )
+# def all(request:Request,db:Session = Depends(get_db) ):
+#        devices = db.query(models.Device).all()
+#       #  return templates.TemplateResponse("devices/show_device.html", {"request": request, "devices":devices})
+#        return devices
       
       
       
