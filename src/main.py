@@ -115,7 +115,7 @@ def all_user(db:session = Depends(get_db)):
       allusers = db.query(models.User).all()
       return allusers
 
-@app.get('/',response_class=HTMLResponse,tags=["Login"])
+@app.get('/',tags=["Login"])
 def get_login(request:Request):
    return templates.TemplateResponse("login.html",{"request":request})
 
