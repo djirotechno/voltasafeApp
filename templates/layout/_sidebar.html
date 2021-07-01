@@ -14,6 +14,7 @@
     <link href="{{ url_for('static', path='/assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', path='/assets/plugins/animate-css/animate.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', path='/assets/css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/assets/css/styles.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', path='/assets/css/color_skins.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', path='/assets/plugins/morrisjs/morris.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', path='/assets/css/hm-style.css') }}" rel="stylesheet">
@@ -21,12 +22,25 @@
     <link href="{{ url_for('static', path='/assets/css/color_skins.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', path='/assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', path='/assets/plugins/multi-select/css/multi-select.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/assets/plugins/multi-select/css/multi-select.css') }}" rel="stylesheet">
+    
 
 
+<!-- Import Leaflet CSS Style Sheet -->
+<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
+<!-- Import Leaflet JS Library -->
+<script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
 
+<style>
 
-
-
+    #my_osm_widget_map { /* use the same name as <div id=""> */
+        width: 100%; /* important! if you need full width display */
+        height: 400px;
+        margin: 0;
+        border-radius: 5px;
+        /* ... */
+    }
+</style>
     
 </head>
 
@@ -59,7 +73,7 @@
 <!-- Top Bar -->
 <nav class="navbar">
     <div class="col-12">
-        <div class="navbar-header"><a href="javascript:void(0);" class="h-bars"></a><a class="navbar-brand" href="index.html">Nexa</a></div>
+        <div class="navbar-header"><a href="javascript:void(0);" class="h-bars"></a><a class="navbar-brand" href="index.html">VoltaSafe</a></div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="zmdi zmdi-search"></i></a></li>
             <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle xs-hide" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i>
@@ -146,37 +160,21 @@
 <div class="menu-container">
     <div class="menu">
         <ul class="pullDown">
-            <li><a href="/dashboard">Dashboard</a>
+            <li><a href="/home">Dashboard</a>
     
             </li>
-            <li><a href="/devices"><i class="zmdi zmdi-shopping-cart"></i> Devices</a>
-                <ul class="pullDown">
-                    <li><a href="/form_device">Device</a></li>
-                    
-                </ul>
+            <li><a href="/devices"><i class=""></i> Devices</a>
             </li>                  
             <li><a href="/gatewayes">Gatewaye</a>
-                <ul class="pullDown">
-                    <li><a href="/form_gw">Gatewayes</a></li>
-                   
-                </ul>
-            </li>            
-            <li><a href="/sensors">Sensor</a>
-                <ul class="pullDown">
-                    <li><a href="/form_sensor" >Sensors</a></li>
-                    
-                </ul>
-            </li>
             <li><a href="/projets">Projet</a>
-                <ul class="pullDown">                            
-                    <li><a href="/form_projet">Projets</a></li>
-                    
-                </ul>
+                
             </li>  
-            <li><a href="/projets">Dimensionement</a>
-                <ul class="pullDown">                            
-                    <li><a href="/form_projet">Dimensionement</a></li>
-                </ul>
+            <li><a href="/dimension">Dimensionement</a>
+                
+            </li> 
+
+            <li class="pull-right"><a href="http://127.0.0.1:8000/docs">API DOCS</a>
+    
             </li> 
         </ul>
     </div>
@@ -185,6 +183,7 @@
 
 {% block content %}  
 
+    
 {% endblock %} 
 </div>
             
@@ -195,57 +194,30 @@
     <script src="{{url_for('static',path='/assets/plugins/jquery-steps/jquery.steps.js')}}"></script>
     <script src="{{url_for('static',path='/assets/bundles/mainscripts.bundle.js')}}"></script>
     <script src="{{url_for('static',path='/assets/js/pages/forms/form-wizard.js')}}"></script>
-    <script src="{{url_for('static',path='/assets/js/pages/forms/form-wizard.js')}}"></script>
+   
     <script src="{{url_for('static',path='/assets/js/pages/iot.js')}}"></script>
     <script src="{{url_for('static',path='/assets/bundles/sparkline.bundle.js')}}"></script>
     <script src="{{url_for('static',path='/assets/plugins/jquery-sparkline/jquery.sparkline.js')}}"></script>
     <script src="{{url_for('static',path='/assets/plugins/raphael/raphael.min.js')}}"></script>
     <script src="{{url_for('static',path='/assets/plugins/morrisjs/morris.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/js/pages/maps/google.js')}}"></script>
+    <script src="{{url_for('static',path='/assets/bundles/knob.bundle.js')}}"></script> <!-- Jquery Knob Plugin Js -->
+    <script src="{{url_for('static',path='/assets/plugins/multi-select/js/jquery.multi-select.js')}}"></script> 
 
-
+    <script src="{{url_for('static',path='/assets/js/pages/charts/jquery-knob.js')}}"></script> 
+    <script src="{{url_for('static',path='/assets/plugins/multi-select/js/jquery.multi-select.js')}}"></script> 
+    <script src="{{url_for('static',path='/assets/js/pages/forms/advanced-form-elements.js')}}"></script> 
+    <script src="{{url_for('static',path='/assets/plugins/gmaps/gmaps.js')}}"></script> 
+    <script src="{{url_for('static',path='assets/bundles/mainscripts.bundle.js')}}"></script> 
+    <script src="{{url_for('static',path='assets/bundles/mainscripts.bundle.js')}}"></script> 
+    
+    <script src="https://maps.google.com/maps/api/js?v=3&sensor=false"></script> <!-- Google Maps API Js --> 
  
-  
     
+   
     
-    
-  
-
-
-
-
-
-
-    <script>
-        /*global $ */
-        $(document).ready(function() {
-            "use strict";
-            $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
-            //Checks if li has sub (ul) and adds class for toggle icon - just an UI
-          
-            $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
-          
-            $(".menu > ul > li").hover(function(e) {
-              if ($(window).width() > 943) {
-                $(this).children("ul").stop(true, false).fadeToggle(150);
-                e.preventDefault();
-              }
-            });
-            //If width is more than 943px dropdowns are displayed on hover    
-            $(".menu > ul > li").on('click',function() {
-              if ($(window).width() <= 943) {
-                $(this).children("ul").fadeToggle(150);
-              }
-            });
-            //If width is less or equal to 943px dropdowns are displayed on click (thanks Aman Jain from stackoverflow)
-          
-            $(".h-bars").on('click',function(e) {
-              $(".menu > ul").toggleClass('show-on-mobile');
-              e.preventDefault();
-            });
-            //when clicked on mobile-menu, normal menu is shown as a list, classic rwd menu story (thanks mwl from stackoverflow)
-          
-          });
-        </script>    
+   
+ 
     
 </body>
 

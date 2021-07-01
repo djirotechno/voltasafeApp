@@ -1,0 +1,371 @@
+
+
+{% extends '/layout/_sidebar.html'%}
+
+{% block title %} Projets{% endblock %}
+
+{% block content %}
+
+
+<section class="content profile-page">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-sm-12">
+                <div class="body">
+                   
+                   
+                </div>
+               <br>
+               <br>
+               <br>
+               <br>
+               <br>
+                <div class="card overflowhidden m-t-10">
+                    <div class="profile-sub-header">
+                        <div class="box-list">
+                            <ul class="text-center">
+                                <li><a href="" class="" data-toggle="modal" data-target="#largeModal"><i class="zmdi zmdi-router"></i><p>Gatewaye</p></a></li>
+                                <li><a href="" class="" data-toggle="modal" data-target="#device"><i class="zmdi zmdi-devices"></i><p>Devices</p></a></li>
+                                <!-- <li><a href="javascript:void(0);" data-toggle="modal" data-target="#sensor"><i class="zmdi zmdi-memory"></i><p>Sensors</p></a></li> -->
+                                <!-- <li><a href="events.html"><i class="zmdi zmdi-format-subject"></i><p>Events</p></a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>        
+        
+    </div>
+</section>
+
+<section class="content">
+   
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card overflowhidden number-chart">
+                    <div class="body">
+                        <div class="number">
+                            <h6>Temperature</h6>
+                            <span>49°C</span>
+                            
+                        </div>
+                        <!-- <small class="text-muted">89% compared to average monthly use</small> -->
+                    </div>
+                    <div class="sparkline" data-type="line" data-spot-Radius="0" data-highlight-Spot-Color="rgb(63, 81, 181)"
+                        data-highlight-Line-Color="#222" data-min-Spot-Color="rgb(233, 30, 99)"
+                        data-max-Spot-Color="rgb(63, 81, 181)" data-spot-Color="rgb(63, 81, 181, 0.7)" data-width="100%"
+                        data-height="50px" data-line-Width="0" data-line-Color="rgba(63, 81, 181, 0)" data-fill-Color="#fcefcb">
+                        1,2,3,1,4,3,6,4,4,1 </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card overflowhidden number-chart">
+                    <div class="body">
+                        <div class="number">
+                            <h6>Voltage</h6>
+                          
+                            <span>16.32 V</span>
+                         
+                        </div>
+                        <!-- <small class="text-muted">5% less than daily average</small> -->
+                    </div>
+                    <div class="sparkline" data-type="line" data-spot-Radius="0" data-highlight-Spot-Color="rgb(63, 81, 181)"
+                        data-highlight-Line-Color="#222" data-min-Spot-Color="rgb(233, 30, 99)"
+                        data-max-Spot-Color="rgb(120, 184, 62)" data-spot-Color="rgb(63, 81, 181, 0.7)" data-offset="90"
+                        data-width="100%" data-height="50px" data-line-Width="0" data-line-Color="rgba(63, 81, 181, 0)"
+                        data-fill-Color="#e5ddf5"> 1,3,5,4,2,5,4,6,3,1 </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card overflowhidden number-chart">
+                    <div class="body">
+                        <div class="number">
+                            <h6>Courrent</h6>
+                            <span>0.16 A</span>
+                        </div>
+                        <!-- <small class="text-muted">Outside Avg temprature is 32° C</small> -->
+                    </div>
+                    <div class="sparkline" data-type="line" data-spot-Radius="0" data-highlight-Spot-Color="rgb(63, 81, 181)" data-highlight-Line-Color="#222" data-min-Spot-Color="rgb(233, 30, 99)" data-max-Spot-Color="rgb(120, 184, 62)" data-spot-Color="rgb(63, 81, 181, 0.7)" data-offset="90" data-width="100%" data-height="50px" data-line-Width="0" data-line-Color="rgba(255, 199, 204, 0)" data-fill-Color="#ffc7cc"> 3,8,1,2,9,7,1,2,0,1 </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card appliances-grp ng-star-inserted">
+                    <div class="body clearfix">
+                        <div class="icon"><img alt="" src="assets/images/air-conditioner.png"></div>
+                        <div class="content">
+                            <h6> Ensoleillement<span class="text-success"> m2</span></h6>
+                            <p class="ng-star-inserted">Power<span class="text-warning">250 kw/h</span></p>
+                            <!-- <p class="ng-star-inserted">Status <span class="text-warning">Cooling On</span></p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card appliances-grp ng-star-inserted">
+                    <div class="body clearfix">
+                        <div class="icon"><img alt="" src="assets/images/fridge.png"></div>
+                        <div class="content">
+                            <h6 _ngcontent-c23="">Humidite <span class="text-success"> %</span></h6>
+                            <p class="ng-star-inserted">Temprature Ambiante<span class="text-primary">10° C</span></p>
+                            <!-- <p class="ng-star-inserted">Status <span class="text-success">Stand By</span></p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <div class="card">
+                        <div class="header">
+                        <h2>Installation</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="zmdi zmdi-more-vert"></i>
+                            </a>
+                            <ul class="dropdown-menu float-right">
+                                <li>
+                                <a href="javascript:void(0);">Action</a>
+                                </li>
+                                <li>
+                                <a href="javascript:void(0);">Another action</a>
+                                </li>
+                                <li>
+                                <a href="javascript:void(0);">Something else here</a>
+                                </li>
+                            </ul>
+                            </li>
+                        </ul>
+                        </div>
+                        <div class="body table-responsive">
+                        <table class="table table-hover m-b-0">
+                            <thead>
+                            <tr>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Type Panneaux</td>
+                                <td>
+                                <span class="sparkbar">Monocrystaline</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Puissance wc</td>
+                                <td>
+                                <span class="sparkbar">30w</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Vmax</td>
+                                <td>
+                                <span class="sparkbar">18 V</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Imax</td>
+                                <td>
+                                <span class="sparkbar">1.5 A</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Temperature max</td>
+                                <td>
+                                <span class="sparkbar">45° C</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nombre de Panneaux</td>
+                                <td>
+                                <span class="sparkbar">1</span>
+                                </td>
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <!-- <div class="header">
+                        <h2>Day/Night Use</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                                    role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">All On</a></li>
+                                    <li><a href="javascript:void(0);">All Off</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <!-- <div class="body">
+                        <div id="donut_chart" class="graph"></div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    
+       
+        </div> -->
+    </div>
+</section>
+<section>
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">Projet Gatewayes</h4>
+                </div>
+                <div class="modal-body"> 
+                    <div class="card">
+                        <div class="header">
+                        <h2></h2>
+                       
+                        </div>
+                        <div class="body table-responsive">
+                        <table class="table table-hover m-b-0">
+                            <thead>
+                            <tr>
+                                <th>Name Gatewaye</th>
+                                <th>Location</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>volta_safe</td>
+                                <td>
+                                <span class="sparkbar">Lambaye</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>waziup2021</td>
+                                <td>
+                                <span class="sparkbar">Dakar</span>
+                                </td>
+                            </tr> 
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="modal fade" id="device" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">{{devices.name}}</h4>
+                </div>
+                <div class="modal-body"> 
+                    
+            
+                   <div class="card">
+                    <div class="header">
+                    <h2> </h2>
+                   
+                    </div>
+                    <div class="body table-responsive">
+                    <table class="table table-hover m-b-0">
+                        <thead>
+                        <tr>
+                            
+                            <th>Num</th>
+                            <th>Sensor</th>
+                            <th>Sensor Quantity Kind</th>
+                            <th>Unit</th>
+                            <th>Gatewaye</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for sensor in devices.sensors%}
+                        <tr>
+                            
+                            <td>1 </td>
+                            <td><span class="sparkbar">{{sensor.name}}</span></td>
+                            <td><span class="sparkbar">{{sensor.quantity_kind}}</span></td>
+                            <td><span class="sparkbar">{{sensor.unit}}</span></td>
+                            <td><span class="sparkbar">vs_gatewaye</span></td>
+                        </tr>
+                     
+                        {% endfor%}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                  
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="modal fade" id="sensor" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="largeModalLabel">Projet Sensors</h4>
+                </div>
+                <div class="modal-body"> 
+                    <div class="card">
+                        <div class="header">
+                        <h2></h2>
+                       
+                        </div>
+                        <div class="body table-responsive">
+                        <table class="table table-hover m-b-0">
+                            <thead>
+                            <tr>
+                                <th>Name Sensor</th>
+                                <th>kind sensor</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Dean Otto</td>
+                                <td>
+                                <span class="sparkbar">5,8,6,3,5,9,2</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>K. Thornton</td>
+                                <td>
+                                <span class="sparkbar">10,8,9,3,5,8,5</span>
+                                </td>
+                            </tr> 
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+

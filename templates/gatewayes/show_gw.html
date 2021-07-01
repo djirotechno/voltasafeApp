@@ -26,27 +26,39 @@
 
 <section class="content">
     <div class="container-fluid">
+        
         <div class="row clearfix">
-            {% for gw in gw %}
+      
             <div class="col-lg-4 col-md-3 col-sm-3">
+                <br>
+                <br>
+                <br>
                 <div class="card">
                     <div class="header">
-                        <h3>Devices</h3>
+                        <h3>vs_gatewaye</h3>
                         <ul class="header-dropdown m-r--5">
                             <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
                                 <ul class="dropdown-menu pull-right" class="pullDown">
-                                    <li><a href="/device/{{gw.id}}/edit" data-toggle="modal" data-target="#largeModal">Edit</a></li>
+                                    <li><a href="" data-toggle="modal" data-target="#largeModal">Edit</a></li>
                                     <li><a href="javascript:void(0);">Delete</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                     <div class="body">
-                        {{gw.name}}
+                        
+                          
+                                   <li>Device_dc</li>
+                                   
+                                    <li>device_voltage</li>
+                                    
+                               
+                            
+                    
                     </div>
                 </div>
             </div>
-            {% endfor %}
+        
         </div>
         <!-- #END# Advanced Form Example With Validation --> 
     </div>
@@ -60,24 +72,7 @@
                     <h4 class="modal-title" id="largeModalLabel">Modal title</h4>
                 </div>
                 <div class="modal-body"> 
-                    <form id="wizard_with_validation" method="POST"  action="/device">
-                        <fieldset>
-                             <div class="form-group form-float">
-                                 <div class="form-line">
-                                     <input type="text" name="deviceName" id="modal_body" class="form-control" required>
-                                     <label class="form-label"></label>
-                                 </div>
-                             </div>
-                             <div class="form-group form-float">
-                                 <label class="form-label">Gatewaye</label>
-                             <div class="col-lg-3 col-md-6">
-                                 <select class="form-control show-tick" name="gw_id">
-                                    
-                                 </select>
-                             </div>
-                             </div>
-                         </fieldset>
-                        </form>
+                  
                 </div>
                 <div class="modal-footer">
                     <input type="submit" value="SAVE CHANGES" class="btn btn-link waves-effect">
@@ -87,5 +82,10 @@
         </div>
     </div>
 </section>
-
+<script type="text/javascript">
+    var timer = function() {
+        setTimeout(function(){ window.location.reload(); }, 15000);
+    };
+    timer();
+    </script>
 {% endblock %}
